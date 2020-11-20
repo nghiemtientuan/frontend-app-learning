@@ -2,6 +2,7 @@
 import React, {
   useContext, useState, useCallback, useMemo,
 } from 'react';
+import { AppContext } from '@edx/frontend-platform/react';
 
 import { UserMessagesContext, ALERT_TYPES, useAlert } from '../../generic/user-messages';
 import { useModel } from '../../generic/model-store';
@@ -11,13 +12,14 @@ import { postCourseEnrollment } from './data/api';
 const EnrollmentAlert = React.lazy(() => import('./EnrollmentAlert'));
 
 export function useEnrollmentAlert(courseId) {
+  const { authenticatedUser } = useContext(AppContext);
   const course = useModel('courses', courseId);
   const outline = useModel('outline', courseId);
-  const isVisible = course && course.isEnrolled !== undefined && !course.isEnrolled;
+  const isVisible = course && course.isEnrolled !== undefined && !course.isEnrolled && authenticatedUser !== null;
   const payload = {
-    canEnroll: outline.enrollAlert.canEnroll,
+    canEnroll: outline ? outline.enrollAlert.canEnroll : false,
     courseId,
-    extraText: outline.enrollAlert.extraText,
+    extraText: outline ? outline.enrollAlert.extraText : '',
     isStaff: course.isStaff,
   };
 
@@ -30,10 +32,10 @@ export function useEnrollmentAlert(courseId) {
   return { clientEnrollmentAlert: EnrollmentAlert };
 }
 
-export function useEnrollClickHandler(courseId, successText) {
+export function useEnrollClickHandler(courseIdMemo, successText) {
   const [loading, setLoading] = useState(false);
   const { addFlash } = useContext(UserMessagesContext);
-  const enrollClickHandler = useCallback(() => {
+  const enrollClickHandler = useCallback((courseId) => () => {
     setLoading(true);
     postCourseEnrollment(courseId).then(() => {
       addFlash({
@@ -46,7 +48,7 @@ export function useEnrollClickHandler(courseId, successText) {
       setLoading(false);
       global.location.reload();
     });
-  }, [courseId]);
+  }, [courseIdMemo]);
 
   return { enrollClickHandler, loading };
 }

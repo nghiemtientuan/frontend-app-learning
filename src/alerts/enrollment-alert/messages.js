@@ -13,7 +13,7 @@ const messages = defineMessages({
   },
   enroll: {
     id: 'learning.enrollment.enroll.now',
-    defaultMessage: 'Enroll Now',
+    defaultMessage: 'Enroll now',
     description: 'A link prompting the user to click on it to enroll in the currently viewed course.',
   },
   success: {

@@ -96,7 +96,7 @@ initialize({
   },
   // TODO: Remove this once the course blocks api supports unauthenticated
   // access and we are prepared to support public courses in this app.
-  requireAuthenticatedUser: true,
+  requireAuthenticatedUser: false,
   messages: [
     appMessages,
     headerMessages,

@@ -14,6 +14,7 @@ import genericMessages from '../../generic/messages';
 import messages from './messages';
 import Section from './Section';
 import UpdateGoalSelector from './widgets/UpdateGoalSelector';
+import UpgradeCard from './widgets/UpgradeCard';
 import useAccessExpirationAlert from '../../alerts/access-expiration-alert';
 import useCertificateAvailableAlert from './alerts/certificate-available-alert';
 import useCourseEndAlert from './alerts/course-end-alert';
@@ -170,6 +171,7 @@ function OutlineTab({ intl }) {
           <CourseTools
             courseId={courseId}
           />
+          <UpgradeCard />
           <CourseDates
             start={start}
             end={end}

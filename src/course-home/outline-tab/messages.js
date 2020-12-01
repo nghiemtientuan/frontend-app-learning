@@ -83,6 +83,15 @@ const messages = defineMessages({
     id: 'learning.outline.tools',
     defaultMessage: 'Course Tools',
   },
+  upgradeTitle: {
+    id: 'learning.outline.upgradeTitle',
+    defaultMessage: 'Pursue a verified certificate',
+  },
+  certAlt: {
+    id: 'learning.outline.certificateAlt',
+    defaultMessage: 'Example Certificate',
+    description: 'Alternate text displayed when the example certificate image cannot be displayed.',
+  },
   welcomeMessage: {
     id: 'learning.outline.welcomeMessage',
     defaultMessage: 'Welcome Message',

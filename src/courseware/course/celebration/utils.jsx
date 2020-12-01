@@ -16,14 +16,15 @@ function handleNextSectionCelebration(sequenceId, nextSequenceId, nextUnitId) {
   });
 }
 
-function recordFirstSectionCelebration(courseId) {
+function recordFirstSectionCelebration(org, courseId) {
   // Tell the LMS
   postFirstSectionCelebrationComplete(courseId);
 
   // Tell our analytics
   const { administrator } = getAuthenticatedUser();
   sendTrackEvent('edx.ui.lms.celebration.first_section.opened', {
-    course_id: courseId,
+    org_key: org,
+    course_id: courseId, // should be courserun_key, but left as-is for historical reasons
     is_staff: administrator,
   });
 }

@@ -31,6 +31,7 @@ function SocialIcons({
 }) {
   const {
     marketingUrl,
+    org,
     title,
   } = useModel('courses', courseId);
 
@@ -48,7 +49,8 @@ function SocialIcons({
 
     const { administrator } = getAuthenticatedUser();
     sendTrackEvent(analyticsId, {
-      course_id: courseId,
+      org_key: org,
+      course_id: courseId, // should be courserun_key, but left as-is for historical reasons
       is_staff: administrator,
       service,
     });
